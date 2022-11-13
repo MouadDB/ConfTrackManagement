@@ -10,38 +10,37 @@ import java.util.List;
  * @author Mouad Douieb
  */
 public class Session {
-    
+
     /**
      * Session total duration
      */
     private int totalDuration;
-    
+
     /**
      * Session available minutes
      */
     private int availableMinutes;
-    
+
     /**
      * Session available minutes extended
      */
     private int availableMinutesExtended;
-    
+
     /**
      * Session start time
      */
     private LocalTime startTime;
-    
+
     /**
      * Session end time
      */
     private LocalTime endTime;
-    
+
     /**
      * Session end time extended
      */
     private LocalTime endTimeExtended;
-    
-    
+
     /**
      * Session talks list
      */
@@ -51,12 +50,54 @@ public class Session {
         this.startTime = startTime;
         this.endTime = endTime;
         this.endTimeExtended = endTimeExtended;
-        
+
         this.availableMinutes = (int) ChronoUnit.MINUTES.between(this.startTime, this.endTime);
         this.availableMinutesExtended = (int) ChronoUnit.MINUTES.between(this.startTime, this.endTimeExtended);
     }
-    
-    
+
+    public Session(LocalTime startTime, LocalTime endTime) {
+        this(startTime, endTime, endTime);
+    }
+
+    public boolean addTalk(Talk talk, boolean extended) {
+        if (this.checkTalk(talk, extended)) {
+
+            this.talks.add(talk);
+
+            this.updateTime();
+            return true;
+        }
+        return false;
+    }
+
+    public void addTalk(Talk talk) {
+        this.talks.add(talk);
+        this.updateTime();
+    }
+
+    public int calculatedAvailableMinutes(boolean extended) {
+        return extended ? this.availableMinutesExtended : this.availableMinutes;
+    }
+
+    protected boolean checkTalk(Talk talk, boolean extended) {
+
+        if (talk == null) {
+            return false;
+        }
+
+        LocalTime end = this.startTime.plus(this.totalDuration + talk.getDuration(), ChronoUnit.MINUTES);
+
+        return extended ? (end.compareTo(this.endTimeExtended) < 1) : (end.compareTo(this.endTime) < 1);
+    }
+
+    protected void updateTime() {
+
+        Talk lastTalk = this.talks.get(this.talks.size() - 1);
+
+        this.totalDuration += lastTalk.getDuration();
+        this.availableMinutes -= lastTalk.getDuration();
+        this.availableMinutesExtended -= lastTalk.getDuration();
+    }
 
     /**
      * Get the value of talks
@@ -76,7 +117,6 @@ public class Session {
         this.talks = talks;
     }
 
-
     /**
      * Get the value of endTimeExtended
      *
@@ -94,7 +134,6 @@ public class Session {
     public void setEndTimeExtended(LocalTime endTimeExtended) {
         this.endTimeExtended = endTimeExtended;
     }
-
 
     /**
      * Get the value of startTime
@@ -114,7 +153,6 @@ public class Session {
         this.startTime = startTime;
     }
 
-
     /**
      * Get the value of endTime
      *
@@ -132,7 +170,6 @@ public class Session {
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
-
 
     /**
      * Get the value of availableMinutesExtended
@@ -152,7 +189,6 @@ public class Session {
         this.availableMinutesExtended = availableMinutesExtended;
     }
 
-
     /**
      * Get the value of availableMinutes
      *
@@ -170,7 +206,6 @@ public class Session {
     public void setAvailableMinutes(int availableMinutes) {
         this.availableMinutes = availableMinutes;
     }
-
 
     /**
      * Get the value of totalDuration
