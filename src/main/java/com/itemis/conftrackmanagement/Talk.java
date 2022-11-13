@@ -72,6 +72,9 @@ public class Talk {
     }
 
 
-    
+    @Override
+    public String toString() {
+        return this.duration != 15 ? String.format("%s %dmin", this.title, this.duration) : String.format("%s lightning", this.title);
+    }
 
 }
