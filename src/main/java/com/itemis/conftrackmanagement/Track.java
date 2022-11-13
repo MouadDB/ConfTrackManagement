@@ -2,6 +2,7 @@ package com.itemis.conftrackmanagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,12 +12,14 @@ import java.util.logging.Logger;
  * @author Mouad Douieb
  */
 public class Track {
-    
+
+    private static TalkRegexParser parser;
+
     /**
      * To read the order form file
      */
     private String filename = "";
-    
+
     public void setFilename(String filename) {
         this.filename = filename;
     }
@@ -39,6 +42,8 @@ public class Track {
 
             }
 
+            ArrayList<Talk> talks = new ArrayList<Talk>();
+
             while (sc.hasNextLine()) {
 
                 String line = sc.nextLine();
@@ -46,7 +51,9 @@ public class Track {
                 if (line.isEmpty()) {
                     break;
                 } else {
-                    
+                    Talk talk = this.parser.parse(line);
+                    // Check returned talk
+                    talks.add(talk);
                 }
 
             }
