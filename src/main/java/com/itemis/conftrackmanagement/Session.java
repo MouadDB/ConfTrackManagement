@@ -98,7 +98,7 @@ public class Session {
         this.availableMinutes -= lastTalk.getDuration();
         this.availableMinutesExtended -= lastTalk.getDuration();
     }
-    
+
     @Override
     public String toString() {
 
@@ -108,7 +108,7 @@ public class Session {
 
         for (Talk talk : talks) {
             output += String.format("%s %s\n", start, talk.toString());
-            
+
             start = start.plus(talk.getDuration(), ChronoUnit.MINUTES);
         }
 
