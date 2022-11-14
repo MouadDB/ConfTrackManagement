@@ -13,5 +13,7 @@ public class Main {
         Track track = new Track();
         
         track.startConference();
+        
+        track.printProg();
     }
 }

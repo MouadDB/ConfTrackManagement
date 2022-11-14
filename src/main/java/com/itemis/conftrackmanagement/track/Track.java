@@ -16,6 +16,9 @@ public class Track {
     private static TalkRegexParser parser;
 
     private static TrackDayBuilder sessionBuilder;
+    
+    private ArrayList<Talk> talks = new ArrayList<Talk>();
+
 
     /**
      * To read the order form file
@@ -37,7 +40,6 @@ public class Track {
         Scanner sc;
 
         try {
-            ArrayList<Talk> talks = new ArrayList<Talk>();
 
             // Scan user inputs
             if (this.filename.length() > 0) {
@@ -64,13 +66,30 @@ public class Track {
 
             }
 
-            sessionBuilder.build(talks).forEach((trackDay) -> {
-                System.out.println(trackDay);
-            });
+            
 
             sc.close();
         } catch (NumberFormatException | FileNotFoundException ex) {
         }
 
+    }
+    
+    @Override
+    public String toString() {
+        
+        String output = new String();
+        
+        int i = 0;
+        for (TrackDay trackDay : sessionBuilder.build(talks)) {
+            
+            output += trackDay;
+
+        }
+        
+        return output;
+    }
+    
+    public void printProg() {
+        System.out.println(this);
     }
 }
