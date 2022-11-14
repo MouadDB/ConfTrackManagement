@@ -18,6 +18,11 @@ public class TrackDay {
 
         afternoon = new AfternoonSession();
     }
+    
+    public TrackDay(String name) {
+        this.name = name;
+
+    }
 
     /**
      * Track day name
