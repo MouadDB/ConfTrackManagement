@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +14,8 @@ import java.util.logging.Logger;
 public class Track {
 
     private static TalkRegexParser parser;
+
+    private static TrackDayBuilder sessionBuilder;
 
     /**
      * To read the order form file
@@ -31,9 +31,14 @@ public class Track {
     }
 
     public void startConference() {
+
+        this.parser = new TalkRegexParser();
+        this.sessionBuilder = new TrackDayBuilder();
         Scanner sc;
 
         try {
+            ArrayList<Talk> talks = new ArrayList<Talk>();
+
             // Scan user inputs
             if (this.filename.length() > 0) {
                 File file = new File(filename);
@@ -44,8 +49,6 @@ public class Track {
 
             }
 
-            ArrayList<Talk> talks = new ArrayList<Talk>();
-
             while (sc.hasNextLine()) {
 
                 String line = sc.nextLine();
@@ -53,17 +56,21 @@ public class Track {
                 if (line.isEmpty()) {
                     break;
                 } else {
-                    Talk talk = this.parser.parse(line);
+                    System.out.println(line);
+                    Talk talk = Track.parser.parse(line);
                     // Check returned talk
                     talks.add(talk);
                 }
 
             }
 
+            sessionBuilder.build(talks).forEach((trackDay) -> {
+                System.out.println(trackDay);
+            });
+
             sc.close();
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-        } catch (FileNotFoundException ex) {
+        } catch (NumberFormatException | FileNotFoundException ex) {
         }
+
     }
 }
