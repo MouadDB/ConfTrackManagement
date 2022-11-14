@@ -1,4 +1,4 @@
-package com.itemis.conftrackmanagement;
+package com.itemis.conftrackmanagement.session;
 
 import java.time.LocalTime;
 
