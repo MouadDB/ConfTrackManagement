@@ -1,5 +1,7 @@
-package com.itemis.conftrackmanagement;
+package com.itemis.conftrackmanagement.track;
 
+import com.itemis.conftrackmanagement.talk.Talk;
+import com.itemis.conftrackmanagement.talk.TalkRegexParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

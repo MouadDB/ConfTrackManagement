@@ -1,6 +1,6 @@
 package com.itemis.conftrackmanagement.session;
 
-import com.itemis.conftrackmanagement.Talk;
+import com.itemis.conftrackmanagement.talk.Talk;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.itemis.conftrackmanagement;
+package com.itemis.conftrackmanagement.talk;
 
 /**
  *

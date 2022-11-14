@@ -1,4 +1,4 @@
-package com.itemis.conftrackmanagement;
+package com.itemis.conftrackmanagement.track;
 
 import com.itemis.conftrackmanagement.session.MorningSession;
 import com.itemis.conftrackmanagement.session.AfternoonSession;
