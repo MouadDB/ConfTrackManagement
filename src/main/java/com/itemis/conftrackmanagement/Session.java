@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Mouad Douieb
  */
-public class Session {
+public abstract class Session {
 
     /**
      * Session total duration
