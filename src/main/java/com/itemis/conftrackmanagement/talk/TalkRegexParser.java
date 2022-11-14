@@ -9,21 +9,21 @@ import java.util.regex.Pattern;
  */
 public class TalkRegexParser {
     
-    private String lightning;
+    private String lightning = "lightning";;
     
     /**
      * Talk Regular expression
      */
     private final String regex = "(?<title>.*) +(?<duration>\\d+(?=min)|lightning)";
+    
+    /**
+     * Talk pattern
+     */
+    private final Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
     public TalkRegexParser() {
     }
 
-
-    /**
-     * Talk pattern
-     */
-    final Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
     
     /**
      * Parse the talk
@@ -36,7 +36,7 @@ public class TalkRegexParser {
         
         while (result.find()) {
             int duration = result.group("duration").equals(this.lightning) ? 15 : Integer.parseInt(result.group("duration"));
-            return new Talk(result.group("title").toString(), duration);
+            return new Talk(result.group("title"), duration);
         }
 
         return null;
