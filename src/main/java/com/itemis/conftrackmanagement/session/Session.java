@@ -2,6 +2,7 @@ package com.itemis.conftrackmanagement.session;
 
 import com.itemis.conftrackmanagement.talk.Talk;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +109,8 @@ public abstract class Session {
         LocalTime start = this.startTime;
 
         for (Talk talk : talks) {
-            output += String.format("%s %s\n", start, talk.toString());
+
+            output += String.format("%s %s\n", start.format(DateTimeFormatter.ofPattern("hh:mma")), talk.toString());
 
             start = start.plus(talk.getDuration(), ChronoUnit.MINUTES);
         }
