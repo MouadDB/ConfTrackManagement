@@ -1,4 +1,4 @@
-#  Sales Taxes
+#  CONFERENCE TRACK MANAGEMENT
 ### Build the project
 
 ```sh
