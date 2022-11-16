@@ -18,6 +18,6 @@ java -cp classes com.itemis.conftrackmanagement.Main
 mvn test
 ```
 
-### Run Demo
+### Test Demo
 
 [![demo](./test_demo.png)]()
